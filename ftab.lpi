@@ -27,7 +27,7 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="c:\bin\phones.txt  &quot;tel:$Num&quot;"/>
+        <CommandLineParams Value="http://10.77.36.58/cgi-bin/cc.sh?f:$f"/>
       </local>
     </RunParams>
     <RequiredPackages Count="1">

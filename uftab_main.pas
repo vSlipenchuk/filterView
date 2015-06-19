@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ComCtrls, LCLProc, ShellAPI;
+  ComCtrls, LCLProc, ShellAPI,fphttpclient;
 
 type
 
@@ -38,12 +38,41 @@ implementation
 
 { TForm1 }
 
-function getTabWord(var S:WideString):Widestring; // extract word till a tab
+function getTill(var S:WideString; Del:string):Widestring; // extract word till a tab
 var i:integer;
 begin
+  i:=Pos(Del,S);
+  if i=0 then begin  Result:=S; S:=''; end
+  else begin Result:=Copy(S,1,i-Length(Del)); Delete(S,1,i+Length(Del)-1); end;
+end;
+
+
+
+function getTabWord(var S:WideString):Widestring; // extract word till a tab
+//var i:integer;
+begin
+  Result:=getTill(S,#9);
+  {
   i:=Pos(#9,S);
   if i=0 then begin  Result:=S; S:=''; end
   else begin Result:=Copy(S,1,i-1); Delete(S,1,i); end;
+  }
+end;
+
+function getRow(var S:WideString):WideString;
+var l:integer;
+begin
+  Result:=getTill(S,#10);
+  l:=Length(Result);
+  if (l>0) and (Result[l]=#13) then Delete(Result,l,1);
+end;
+
+function getRowCount(S:Widestring):integer;
+begin
+  Result:=0;
+  while S<>'' do begin
+    getRow(S); inc(Result);
+  end;
 end;
 
 function trans(Row:Utf8String):Utf8String;
@@ -73,21 +102,36 @@ begin
   Result:=Pos( trans(F), Row)>0; // try lat->rus
 end;
 
-procedure TForm1.ReloadFiltered(F:WideString);
+function strLoad(FileName:String):string;
 var S:TStringList;
-    Row,W:WideString;
-    i,j,col_count:integer;
+begin
+  S:=TStringList.Create;   S.LoadFromFile(FileName); Result:=S.Text; S.Free;
+end;
+
+
+function strReplace(S,F,T:string):String;
+var p:integer;
+begin
+  p:=Pos(F,S); if (p=0) then begin Result:=S; exit; end; // not found - no changes
+  Result:=Copy(S,1,p-1) + T+ Copy(S,p+Length(F),Length(S)); // change it
+end;
+
+procedure TForm1.ReloadFiltered(F:WideString);
+var Row,Txt,W:WideString;
+    i,j,col_count,row_count:integer;
     LI:TListItem;
     LC:TListColumn;
     firstLoad:boolean;
 begin
-  S:=TStringList.Create;
   lv.Items.Clear;
-  S.LoadFromFile(FileName);
+    if Pos('http://',FileName)=1 then  txt := TFPCustomHTTPClient.SimpleGet(strReplace( FileName,'$f', F)) //;'http://10.77.36.58/cgi-bin/cc.sh?f:'+F);
+        else txt:=strLoad(FileName); //  ShowMessage(Row);
+    row_count:=getRowCount(Txt);
   lv.BeginUpdate;      FirstLoad:=false;
   col_count:=lv.Columns.Count;
-  for i:=0 to S.Count-1 do begin
-     Row:=S[i];
+
+  for i:=0 to row_count-1 do begin
+     Row:=GetRow(Txt); //S[i];
      if (i=0) then begin
         // first call - fill columns from a Row
         if not inited then begin
@@ -153,12 +197,6 @@ begin
   ShellExecute(0,'open',PCHAR(num),nil,nil,0);
 end;
 
-function strReplace(S,F,T:string):String;
-var p:integer;
-begin
-  p:=Pos(F,S); if (p=0) then begin Result:=S; exit; end; // not found - no changes
-  Result:=Copy(S,1,p-1) + T+ Copy(S,p+Length(F),Length(S)); // change it
-end;
 
 procedure TForm1.lvDblClick(Sender: TObject);
 var P:TPOINT;
@@ -181,8 +219,8 @@ begin
     end;
     //num:=lv.Selected.SubItems[0];
     //Dial(num);
-///ShowMessage(Act); // Resulted Action
-ShellExecute(0,'open',PCHAR(num),nil,nil,0);
+//ShowMessage(Act); // Resulted Action
+ShellExecute(0,'open',PCHAR(Act),nil,nil,0);
 end;
 
 
