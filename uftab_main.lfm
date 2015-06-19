@@ -1,0 +1,47 @@
+object Form1: TForm1
+  Left = 1770
+  Height = 321
+  Top = 587
+  Width = 530
+  Caption = 'Form1'
+  ClientHeight = 321
+  ClientWidth = 530
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.4.0.4'
+  object eFilter: TEdit
+    Left = 8
+    Height = 23
+    Top = 8
+    Width = 200
+    OnChange = eFilterChange
+    OnKeyUp = eFilterKeyUp
+    TabOrder = 0
+    Text = 'eFilter'
+  end
+  object lv: TListView
+    Left = 9
+    Height = 274
+    Top = 40
+    Width = 513
+    Columns = <    
+      item
+        Caption = 'Name'
+        Width = 200
+      end    
+      item
+        Caption = 'Num'
+        Width = 100
+      end    
+      item
+        Caption = 'Mobile'
+        Width = 200
+      end>
+    GridLines = True
+    ReadOnly = True
+    RowSelect = True
+    TabOrder = 1
+    ViewStyle = vsReport
+    OnDblClick = lvDblClick
+  end
+end
