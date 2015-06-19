@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ComCtrls, LCLProc, ShellAPI,fphttpclient;
+  ComCtrls, LCLProc, fphttpclient, Process;
 
 type
 
@@ -116,6 +116,24 @@ begin
   Result:=Copy(S,1,p-1) + T+ Copy(S,p+Length(F),Length(S)); // change it
 end;
 
+function Shell(Cmd:string):string; // returns output
+var p:TProcess;
+    s:TStringList;
+begin
+  p:=TProcess.Create(nil);
+//  p.Executable:=Cmd;
+  p.CommandLine:=Cmd;
+  p.Options:=p.Options + [poWaitOnExit,poUsePipes];
+  p.Execute;
+S:=TStringList.Create;
+S.LoadFromStream(P.output);
+Result:=S.Text;
+S.Free;
+  p.Free;
+  //  ShowMessage('ShellCall here:'+Cmd+'!');
+  //ShellExecute(0,'open',PCHAR(Cmd),nil,nil,0);
+end;
+
 procedure TForm1.ReloadFiltered(F:WideString);
 var Row,Txt,W:WideString;
     i,j,col_count,row_count:integer;
@@ -125,6 +143,7 @@ var Row,Txt,W:WideString;
 begin
   lv.Items.Clear;
     if Pos('http://',FileName)=1 then  txt := TFPCustomHTTPClient.SimpleGet(strReplace( FileName,'$f', F)) //;'http://10.77.36.58/cgi-bin/cc.sh?f:'+F);
+     else if Pos('shell://',FileName)=1 then txt:=Shell( Copy(FileName,8,Length(FileName)) ) // replace ?
         else txt:=strLoad(FileName); //  ShowMessage(Row);
     row_count:=getRowCount(Txt);
   lv.BeginUpdate;      FirstLoad:=false;
@@ -191,10 +210,11 @@ begin
   ReloadFiltered('');
 end;
 
+
+
 procedure Dial(Num:string);
 begin
-  Num:='tel:'+Num;
-  ShellExecute(0,'open',PCHAR(num),nil,nil,0);
+  Shell('tel:'+Num);
 end;
 
 
@@ -220,7 +240,9 @@ begin
     //num:=lv.Selected.SubItems[0];
     //Dial(num);
 //ShowMessage(Act); // Resulted Action
-ShellExecute(0,'open',PCHAR(Act),nil,nil,0);
+//Act:='mailto:v@v.ru';
+Shell(Act);
+//ShellExecute(0,'open',PCHAR(Act),nil,nil,0);
 end;
 
 

@@ -8,8 +8,11 @@
       <Unit0>
         <Filename Value="ftab.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
-        <UsageCount Value="32"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -20,134 +23,139 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uftab_main"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="103"/>
-        <CursorPos X="33" Y="127"/>
-        <UsageCount Value="32"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="117"/>
+        <CursorPos X="18" Y="125"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit1>
     </Units>
+    <General>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="96" Column="45" TopLine="87"/>
+        <Caret Line="117" Column="3" TopLine="104"/>
       </Position1>
       <Position2>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="124" Column="8" TopLine="99"/>
+        <Caret Line="131" Column="15" TopLine="110"/>
       </Position2>
       <Position3>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="122" Column="15" TopLine="106"/>
+        <Caret Line="118" Column="3" TopLine="105"/>
       </Position3>
       <Position4>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="126" TopLine="104"/>
+        <Caret Line="116" Column="59" TopLine="105"/>
       </Position4>
       <Position5>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="122" Column="5" TopLine="104"/>
+        <Caret Line="107" Column="21" TopLine="102"/>
       </Position5>
       <Position6>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="117" Column="3" TopLine="104"/>
+        <Caret Line="106" Column="15" TopLine="93"/>
       </Position6>
       <Position7>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="9" Column="30"/>
+        <Caret Line="107" Column="30" TopLine="99"/>
       </Position7>
       <Position8>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="131" Column="15" TopLine="110"/>
+        <Caret Line="94" Column="3" TopLine="81"/>
       </Position8>
       <Position9>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="118" Column="3" TopLine="105"/>
+        <Caret Line="96" Column="13" TopLine="72"/>
       </Position9>
       <Position10>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="116" Column="59" TopLine="105"/>
+        <Caret Line="25" Column="20" TopLine="23"/>
       </Position10>
       <Position11>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="107" Column="21" TopLine="102"/>
+        <Caret Line="98" Column="12" TopLine="83"/>
       </Position11>
       <Position12>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="106" Column="15" TopLine="93"/>
+        <Caret Line="25" Column="21" TopLine="17"/>
       </Position12>
       <Position13>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="107" Column="30" TopLine="99"/>
+        <Caret Line="132" Column="21" TopLine="125"/>
       </Position13>
       <Position14>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="94" Column="3" TopLine="81"/>
+        <Caret Line="99" Column="22" TopLine="78"/>
       </Position14>
       <Position15>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="96" Column="13" TopLine="72"/>
+        <Caret Line="113" Column="40" TopLine="98"/>
       </Position15>
       <Position16>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="25" Column="20" TopLine="23"/>
+        <Caret Line="144" Column="27" TopLine="130"/>
       </Position16>
       <Position17>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="98" Column="12" TopLine="83"/>
+        <Caret Line="27" Column="6" TopLine="8"/>
       </Position17>
       <Position18>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="25" Column="21" TopLine="17"/>
+        <Caret Line="142" Column="9" TopLine="123"/>
       </Position18>
       <Position19>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="132" Column="21" TopLine="125"/>
+        <Caret Line="156" Column="42" TopLine="138"/>
       </Position19>
       <Position20>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="99" Column="22" TopLine="78"/>
+        <Caret Line="88" Column="22" TopLine="70"/>
       </Position20>
       <Position21>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="113" Column="40" TopLine="98"/>
+        <Caret Line="113" Column="24" TopLine="79"/>
       </Position21>
       <Position22>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="144" Column="27" TopLine="130"/>
+        <Caret Line="108" Column="28" TopLine="85"/>
       </Position22>
       <Position23>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="27" Column="6" TopLine="8"/>
+        <Caret Line="127" Column="33" TopLine="103"/>
       </Position23>
       <Position24>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="142" Column="9" TopLine="123"/>
+        <Caret Line="9" Column="22" TopLine="7"/>
       </Position24>
       <Position25>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="184" TopLine="148"/>
+        <Caret Line="190" Column="35" TopLine="102"/>
       </Position25>
       <Position26>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="156" Column="42" TopLine="138"/>
+        <Caret Line="9" Column="43" TopLine="163"/>
       </Position26>
       <Position27>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="88" Column="22" TopLine="70"/>
+        <Caret Line="118" Column="28" TopLine="106"/>
       </Position27>
       <Position28>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="113" Column="24" TopLine="79"/>
+        <Caret Line="128" Column="57" TopLine="112"/>
       </Position28>
       <Position29>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="108" Column="28" TopLine="85"/>
+        <Caret Line="135" Column="1" TopLine="103"/>
       </Position29>
       <Position30>
         <Filename Value="uftab_main.pas"/>
-        <Caret Line="127" Column="30" TopLine="90"/>
+        <Caret Line="145" Column="52" TopLine="127"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
+  <EditorMacros Count="0"/>
 </CONFIG>
