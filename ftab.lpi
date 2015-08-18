@@ -27,7 +27,7 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="'shell:\\ls -la' 'tel:$Num'"/>
+        <CommandLineParams Value="shell://c:\bin\try_it.bat  'tel:$Num'"/>
       </local>
     </RunParams>
     <RequiredPackages Count="1">
@@ -67,9 +67,6 @@
         </Win32>
       </Options>
     </Linking>
-    <Other>
-      <CompilerPath Value="$(CompPath)"/>
-    </Other>
   </CompilerOptions>
   <Debugging>
     <Exceptions Count="3">

@@ -1,11 +1,13 @@
 object Form1: TForm1
-  Left = 1723
-  Height = 321
-  Top = 85
-  Width = 530
+  Left = 1770
+  Height = 496
+  Top = 123
+  Width = 651
   Caption = 'Form1'
-  ClientHeight = 321
-  ClientWidth = 530
+  ClientHeight = 496
+  ClientWidth = 651
+  OnKeyDown = FormKeyDown
+  OnResize = FormResize
   OnShow = FormShow
   Position = poScreenCenter
   LCLVersion = '1.4.0.4'

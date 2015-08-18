@@ -17,11 +17,14 @@ type
     lv: TListView;
     procedure eFilterChange(Sender: TObject);
     procedure eFilterKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lvDblClick(Sender: TObject);
   private
     { private declarations }
   public
+    fHotFind:boolean; // do we need hot find - or wait for enter to update data?
     FileName:string; // Table ToLoad
     inited:boolean;
     fAction:string; // action onRow
@@ -116,13 +119,15 @@ begin
   Result:=Copy(S,1,p-1) + T+ Copy(S,p+Length(F),Length(S)); // change it
 end;
 
-function Shell(Cmd:string):string; // returns output
+function Shell(Cmd,Par:string):string; // returns output
 var p:TProcess;
     s:TStringList;
 begin
+ // ShowMessage( 'TryRun shell:'+Cmd );
   p:=TProcess.Create(nil);
 //  p.Executable:=Cmd;
-  p.CommandLine:=Cmd;
+  p.ShowWindow:=swoHIDE;
+  p.CommandLine:=Cmd+' '+Par;
   p.Options:=p.Options + [poWaitOnExit,poUsePipes];
   p.Execute;
 S:=TStringList.Create;
@@ -130,6 +135,7 @@ S.LoadFromStream(P.output);
 Result:=S.Text;
 S.Free;
   p.Free;
+  //ShowMessage('RES:'+Result);
   //  ShowMessage('ShellCall here:'+Cmd+'!');
   //ShellExecute(0,'open',PCHAR(Cmd),nil,nil,0);
 end;
@@ -143,7 +149,7 @@ var Row,Txt,W:WideString;
 begin
   lv.Items.Clear;
     if Pos('http://',FileName)=1 then  txt := TFPCustomHTTPClient.SimpleGet(strReplace( FileName,'$f', F)) //;'http://10.77.36.58/cgi-bin/cc.sh?f:'+F);
-     else if Pos('shell://',FileName)=1 then txt:=Shell( Copy(FileName,8,Length(FileName)) ) // replace ?
+     else if Pos('shell://',FileName)=1 then txt:=Shell( Copy(FileName,9,Length(FileName))  ,F ) // replace ?
         else txt:=strLoad(FileName); //  ShowMessage(Row);
     row_count:=getRowCount(Txt);
   lv.BeginUpdate;      FirstLoad:=false;
@@ -187,11 +193,30 @@ end;
 procedure TForm1.eFilterKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState
   );
 begin
-  ReloadFiltered(eFilter.Text);
+  if fHotFind then ReloadFiltered(eFilter.Text) // on any change
+   else begin
+   if ((Key = 13) and (not fHotFind)) then ReloadFiltered(eFilter.Text); // on enter..
+    end;
+   {
   if (Key = 13) and (lv.Items.Count = 1) then begin // single result -> default action
     lv.Selected:=lv.Items[0];
    lvDblClick(Self);
   end;
+  }
+end;
+
+procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
+  );
+begin
+  if Key = 121 {VK_F10} then fHotFind:=not fHotFind;
+end;
+
+procedure TForm1.FormResize(Sender: TObject);
+var Gap:integer;
+begin
+  Gap:=lv.Left;
+  lv.Width:=Form1.Width-2*Gap;
+  lv.Height:=Form1.Height-2*Gap-lv.Top;
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
@@ -214,7 +239,33 @@ end;
 
 procedure Dial(Num:string);
 begin
-  Shell('tel:'+Num);
+  Shell('tel:'+Num,'');
+end;
+
+
+function Shell2(Cmd,Par:string;wait:boolean):string; // returns output
+var p:TProcess;
+    s:TStringList;
+begin
+ // ShowMessage( 'TryRun shell:'+Cmd );
+  p:=TProcess.Create(nil);
+//  p.Executable:=Cmd;
+  p.ShowWindow:=swoHIDE;
+  p.CommandLine:=Cmd+' '+Par;
+//  p.Options:=po
+  if Wait then   p.Options:=p.Options + [poUsePipes];
+  if wait then   p.Options:=p.Options + [poWaitOnExit];
+  p.Execute;
+  {/*
+S:=TStringList.Create;
+S.LoadFromStream(P.output);
+Result:=S.Text;
+S.Free;
+*/ }
+  p.Free;
+  //ShowMessage('RES:'+Result);
+  //  ShowMessage('ShellCall here:'+Cmd+'!');
+  //ShellExecute(0,'open',PCHAR(Cmd),nil,nil,0);
 end;
 
 
@@ -241,7 +292,7 @@ begin
     //Dial(num);
 //ShowMessage(Act); // Resulted Action
 //Act:='mailto:v@v.ru';
-Shell(Act);
+Shell2(Act,'',false);
 //ShellExecute(0,'open',PCHAR(Act),nil,nil,0);
 end;
 
